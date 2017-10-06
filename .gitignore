@@ -1,0 +1,9 @@
+/vimplug/*
+!/vimplug/README.md
+/vimconfig/doc/*.cnx
+/vimconfig/doc/tags-cn
+/vimconfig/autoload/plug.vim
+/vimconfig/syntax/help_cn.vim
+/vimconfig/plugin/vimcdoc.vim
+!.gitignore
+
