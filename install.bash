@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 vimcdocurl='https://sourceforge.net/projects/vimcdoc/files/vimcdoc/vimcdoc-2.1.0.tar.gz/download'
-BASEDIR=$(dirname $(realpath $BASH_SOURCE))
+BASEDIR=$(dirname $(readlink -f ${BASH_SOURCE}))
 
 make_link()
 {
@@ -62,8 +62,8 @@ make_link "${BASEDIR}/vimplug" "${HOME}/.local/share/vim/site/plugged" # like nv
 make_link "${BASEDIR}/vimconfig" "${HOME}/.config/nvim"
 make_link "${BASEDIR}/vimplug" "${HOME}/.local/share/nvim/site/plugged"
 
-bash ./tools/install_vimcdoc.sh
-bash ./tools/install_vim-plug.sh
+bash ./tools/install_vimcdoc.bash
+bash ./tools/install_vim-plug.bash
 
 
 vim +PlugInstall +':q' +':q'
