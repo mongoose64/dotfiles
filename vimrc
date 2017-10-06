@@ -137,7 +137,7 @@ let g:ft_man_open_mode = 'vert'
 set splitbelow
 set splitright
 " make help vsplit
-cnoreabbrev H vert h 
+cnoreabbrev H vert h
 cnoreabbre HR vert bo h
 
 " fold
