@@ -24,6 +24,7 @@ Plug 'tpope/vim-sensible'
 Plug 'junegunn/vim-slash'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'tpope/vim-eunuch'
 
 
 Plug 'junegunn/vim-easy-align'

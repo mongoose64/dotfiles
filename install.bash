@@ -2,6 +2,7 @@
 
 vimcdocurl='https://sourceforge.net/projects/vimcdoc/files/vimcdoc/vimcdoc-2.1.0.tar.gz/download'
 BASEDIR=$(dirname $(readlink -f ${BASH_SOURCE}))
+export BASEDIR
 
 make_link()
 {
@@ -35,6 +36,7 @@ make_link()
   fi
   echo success make link ${t} --\> ${s}
 }
+export -f make_link
 
 make_dir()
 {
@@ -51,6 +53,43 @@ make_dir()
     mkdir "$p" -p
   done
 }
+export -f make_dir
+
+append_line() {
+  set -e
+
+  local update line file pat lno
+  update="$1"
+  line="$2"
+  file="$3"
+  pat="${4:-}"
+  lno=""
+
+  echo "Update $file:"
+  echo "  - $line"
+  if [ -f "$file" ]; then
+    if [ $# -lt 4 ]; then
+      lno=$(\grep -nF "$line" "$file" | sed 's/:.*//' | tr '\n' ' ')
+    else
+      lno=$(\grep -nF "$pat" "$file" | sed 's/:.*//' | tr '\n' ' ')
+    fi
+  fi
+  if [ -n "$lno" ]; then
+    echo "    - Already exists: line #$lno"
+  else
+    if [ $update -eq 1 ]; then
+      [ -f "$file" ] && echo >> "$file"
+      echo "$line" >> "$file"
+      echo "    + Added"
+    else
+      echo "    ~ Skipped"
+    fi
+  fi
+  echo
+  set +e
+}
+
+export -f append_line
 
 # for vim
 make_link "${BASEDIR}/vimrc" "${HOME}/.vimrc"
@@ -65,9 +104,11 @@ make_link "${BASEDIR}/vimplug" "${HOME}/.local/share/nvim/site/plugged"
 bash ./tools/install_vimcdoc.bash
 bash ./tools/install_vim-plug.bash
 
+make_link ${BASEDIR}/bash_customs "${HOME}/.bash_customs"
+bash ./tools/install_bash_customs.bash
+bash ./tools/install_sbp.bash
 
 vim +PlugInstall +':q' +':q'
 nvim +PlugInstall +':q' +':q'
-
 
 

@@ -6,4 +6,4 @@
 /vimconfig/syntax/help_cn.vim
 /vimconfig/plugin/vimcdoc.vim
 !.gitignore
-
+/vimconfig/.netrwhist
