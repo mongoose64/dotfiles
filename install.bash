@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-vimcdocurl='https://sourceforge.net/projects/vimcdoc/files/vimcdoc/vimcdoc-2.1.0.tar.gz/download'
 BASEDIR=$(dirname $(readlink -f ${BASH_SOURCE}))
 export BASEDIR
 
@@ -107,6 +106,8 @@ bash ./tools/install_vim-plug.bash
 make_link ${BASEDIR}/bash_customs "${HOME}/.bash_customs"
 bash ./tools/install_bash_customs.bash
 bash ./tools/install_sbp.bash
+
+make_link ${BASEDIR}/gitconfig "${HOME}/.gitconfig"
 
 vim +PlugInstall +':q' +':q'
 nvim +PlugInstall +':q' +':q'
